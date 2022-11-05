@@ -1,0 +1,73 @@
+{
+  "mappings" : [ {
+    "id" : "57d84c49-1593-43c1-a891-a8e10dd89351",
+    "name" : "get badrequest for payment data",
+    "request" : {
+      "url" : "/api/user/94e1dda9",
+      "method" : "GET"
+    },
+    "response" : {
+      "status" : 400,
+      "body" : "{\n  \"message\": \"failure to get payment data for this user id\"\n}",
+      "headers" : { },
+      "delayDistribution" : {
+        "type" : "uniform",
+        "lower" : 100,
+        "upper" : 1000
+      }
+    },
+    "uuid" : "57d84c49-1593-43c1-a891-a8e10dd89351",
+    "persistent" : true,
+    "priority" : 1,
+    "metadata" : {
+      "mocklab" : {
+        "created" : {
+          "at" : "2022-11-05T12:38:41.902553379Z",
+          "via" : "ADMIN_API",
+          "by" : "08ze4"
+        },
+        "updated" : {
+          "at" : "2022-11-05T12:42:10.028350658Z",
+          "via" : "ADMIN_API",
+          "by" : "08ze4"
+        },
+        "description" : "Obtém dados para efetuar pagamento por boleto"
+      }
+    },
+    "postServeActions" : [ ]
+  }, {
+    "id" : "645530de-7ede-4397-8746-876d32afbb79",
+    "name" : "get data for payment",
+    "request" : {
+      "url" : "/api/user/94e1dda9-747b-4b2b-997e-84c5e4b177f7",
+      "method" : "GET"
+    },
+    "response" : {
+      "status" : 200,
+      "body" : "{\n  \"user\": \"94e1dda9-747b-4b2b-997e-84c5e4b177f7\"\n}",
+      "headers" : { }
+    },
+    "uuid" : "645530de-7ede-4397-8746-876d32afbb79",
+    "persistent" : true,
+    "priority" : 1,
+    "metadata" : {
+      "mocklab" : {
+        "created" : {
+          "at" : "2022-11-05T12:35:04.84688084Z",
+          "via" : "ADMIN_API",
+          "by" : "08ze4"
+        },
+        "updated" : {
+          "at" : "2022-11-05T12:36:53.601273597Z",
+          "via" : "ADMIN_API",
+          "by" : "08ze4"
+        },
+        "description" : "Obtém dados para efetuar pagamento por boleto"
+      }
+    },
+    "postServeActions" : [ ]
+  } ],
+  "meta" : {
+    "total" : 2
+  }
+}
