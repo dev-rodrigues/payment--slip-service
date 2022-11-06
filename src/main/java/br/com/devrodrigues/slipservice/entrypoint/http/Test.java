@@ -17,7 +17,8 @@ public class Test {
 
     @GetMapping
     public void teste() {
-        client.getBillingData("123");
+        var result = client.getBillingData("94e1dda9-747b-4b2b-997e-84c5e4b177f7");
+        System.out.println(result);
     }
 
 }
