@@ -1,6 +1,5 @@
 package br.com.devrodrigues.slipservice.core;
 
-
 public class BillingData {
     private String addres;
     private String zipCode;

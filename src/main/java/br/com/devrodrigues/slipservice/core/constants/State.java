@@ -1,6 +1,6 @@
 package br.com.devrodrigues.slipservice.core.constants;
 
-public enum States {
+public enum State {
     CREATED,
     WAITING,
     PROCESSING,

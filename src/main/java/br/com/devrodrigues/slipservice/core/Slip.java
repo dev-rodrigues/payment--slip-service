@@ -1,6 +1,6 @@
 package br.com.devrodrigues.slipservice.core;
 
-import br.com.devrodrigues.slipservice.core.constants.States;
+import br.com.devrodrigues.slipservice.core.constants.State;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -11,7 +11,7 @@ public class Slip {
     private UUID id;
     private String userId;
     private String orderId;
-    private States state;
+    private State state;
     private BigDecimal value;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
@@ -48,11 +48,11 @@ public class Slip {
         this.orderId = orderId;
     }
 
-    public States getState() {
+    public State getState() {
         return state;
     }
 
-    public void setState(States state) {
+    public void setState(State state) {
         this.state = state;
     }
 
