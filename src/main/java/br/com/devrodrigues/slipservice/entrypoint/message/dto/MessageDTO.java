@@ -1,4 +1,4 @@
-package br.com.devrodrigues.slipservice.entrypoint.dto;
+package br.com.devrodrigues.slipservice.entrypoint.message.dto;
 
 import br.com.devrodrigues.slipservice.core.Slip;
 

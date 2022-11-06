@@ -1,6 +1,6 @@
 package br.com.devrodrigues.slipservice.entrypoint.message;
 
-import br.com.devrodrigues.slipservice.entrypoint.dto.MessageDTO;
+import br.com.devrodrigues.slipservice.entrypoint.message.dto.MessageDTO;
 import br.com.devrodrigues.slipservice.service.SlipService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
