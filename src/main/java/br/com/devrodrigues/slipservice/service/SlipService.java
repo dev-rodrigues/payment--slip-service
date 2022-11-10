@@ -39,13 +39,12 @@ public class SlipService {
 
         var slip = CreateSlipBuilder
                 .builder(userRepository)
-                .withBillingData()
-                .withState(State.PROCESSING)
-                .withOrderId(messageData.getOrderId())
-                .withValue(messageData.getValue())
-                .withOrderId(messageData.getOrderId())
-                .withValue(messageData.getValue())
+                .withBillingId(messageData.getId())
                 .withBillingData(messageData.getUserId())
+                .withState(State.PROCESSING)
+                .withValue(messageData.getValue())
+                .withOrderId(messageData.getOrderId())
+                .withValue(messageData.getValue())
                 .build();
 
         rabbitRepository.producerOnTopic(
@@ -58,7 +57,11 @@ public class SlipService {
 
         var bankResponse = bankRepository.execute(slip);
 
-        var response = SlipResultBuilder.builder(bankResponse).build();
+        var response = SlipResultBuilder
+                .builder(bankResponse)
+                .withBillingId(messageData.getId())
+                .withState(State.PROCESSED)
+                .build();
 
         rabbitRepository.producerOnTopic(
                 new ExternalQueue(

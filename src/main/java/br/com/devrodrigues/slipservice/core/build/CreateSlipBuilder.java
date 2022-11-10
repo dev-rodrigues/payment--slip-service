@@ -6,10 +6,12 @@ import br.com.devrodrigues.slipservice.core.constants.State;
 import br.com.devrodrigues.slipservice.repositories.UserRepository;
 
 import java.math.BigDecimal;
+import java.util.UUID;
 
 public class CreateSlipBuilder {
 
     private final UserRepository userRepository;
+    private UUID billingId;
     private BillingData billingData;
     private String orderId;
     private String userId;
@@ -22,6 +24,11 @@ public class CreateSlipBuilder {
 
     public static CreateSlipBuilder builder(UserRepository userRepository) {
         return new CreateSlipBuilder(userRepository);
+    }
+
+    public CreateSlipBuilder withBillingId(UUID id) {
+        this.billingId = id;
+        return this;
     }
 
     public CreateSlipBuilder withBillingData(String userId) {
@@ -45,13 +52,9 @@ public class CreateSlipBuilder {
         return this;
     }
 
-    public CreateSlipBuilder withBillingData() {
-        this.billingData = userRepository.getBillingData(userId);
-        return this;
-    }
-
     public SlipData build() {
         return new SlipData(
+                billingId,
                 orderId,
                 userId,
                 value,
