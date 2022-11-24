@@ -9,7 +9,7 @@ import java.util.UUID;
 
 public class SlipResultBuilder {
 
-    private final BankResponse bankResponse;
+    private BankResponse bankResponse;
     private UUID billingId;
     private State state;
 
@@ -31,13 +31,18 @@ public class SlipResultBuilder {
         return this;
     }
 
+    public SlipResultBuilder withBankResponse(BankResponse bankResponse) {
+        this.bankResponse = bankResponse;
+        return this;
+    }
+
     public SlipData build() {
         return new SlipData(
                 billingId,
                 null,
                 null,
                 null,
-                State.PROCESSING,
+                state,
                 null
         );
     }

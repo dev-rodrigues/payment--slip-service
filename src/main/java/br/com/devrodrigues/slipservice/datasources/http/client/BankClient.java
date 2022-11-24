@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
         configuration = FeignRetryerConfig.class
 )
 public interface BankClient {
-    @PostMapping(value = "/bank/slip")
+    @PostMapping(value = "/bank/slip", consumes = "application/json", produces = "application/json")
     ResponseEntity<SlipPaymentResponseData> paySlip(
             @RequestBody SlipPaymentData data
     );

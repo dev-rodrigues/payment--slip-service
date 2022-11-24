@@ -5,5 +5,9 @@ public enum State {
     WAITING,
     PROCESSING,
     PROCESSED,
-    ERROR
+    ERROR;
+
+    public static State fromString(String state) {
+        return State.valueOf(state.toUpperCase());
+    }
 }

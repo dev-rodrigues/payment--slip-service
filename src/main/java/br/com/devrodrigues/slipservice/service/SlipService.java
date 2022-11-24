@@ -17,9 +17,6 @@ public class SlipService {
     @Value("${queue.intra.exchange}")
     private String exchange;
 
-    @Value("${queue.intra.payment.result.name}")
-    private String queueName;
-
     @Value("${queue.intra.payment.result.routing.key}")
     private String routingKey;
 
@@ -60,7 +57,8 @@ public class SlipService {
         var response = SlipResultBuilder
                 .builder(bankResponse)
                 .withBillingId(messageData.getId())
-                .withState(State.PROCESSED)
+                .withBankResponse(bankResponse)
+                .withState(State.fromString(bankResponse.status()))
                 .build();
 
         rabbitRepository.producerOnTopic(
