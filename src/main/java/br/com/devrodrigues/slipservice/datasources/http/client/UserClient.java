@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 @FeignClient(
         name = "user-client",
-        url = "${host.user}",
+        url = "${host.mock}",
         configuration = FeignRetryerConfig.class
 )
 public interface UserClient {
