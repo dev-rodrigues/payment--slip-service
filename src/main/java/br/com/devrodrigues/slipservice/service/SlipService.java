@@ -11,6 +11,8 @@ import br.com.devrodrigues.slipservice.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import static java.util.Objects.nonNull;
+
 @Service
 public class SlipService {
 
@@ -44,28 +46,44 @@ public class SlipService {
                 .withValue(messageData.getValue())
                 .build();
 
+
+        if (nonNull(slip.billingData())) {
+
+            rabbitRepository.producerOnTopic(
+                    new ExternalQueue(
+                            exchange,
+                            routingKey,
+                            slip
+                    )
+            );
+
+            var bankResponse = bankRepository.execute(slip);
+
+            var response = SlipResultBuilder
+                    .builder()
+                    .withBillingId(messageData.getId())
+                    .withBillingData(slip.billingData())
+                    .withValue(slip.value())
+                    .withUserId(slip.userId())
+                    .withOrderId(slip.orderId())
+                    .withState(State.fromString(bankResponse.status()))
+                    .build();
+
+            rabbitRepository.producerOnTopic(
+                    new ExternalQueue(
+                            exchange,
+                            routingKey,
+                            response
+                    )
+            );
+        }
+
+        // sent to park when integration failure
         rabbitRepository.producerOnTopic(
                 new ExternalQueue(
                         exchange,
-                        routingKey,
+                        "beta.payment.park",
                         slip
-                )
-        );
-
-        var bankResponse = bankRepository.execute(slip);
-
-        var response = SlipResultBuilder
-                .builder(bankResponse)
-                .withBillingId(messageData.getId())
-                .withBankResponse(bankResponse)
-                .withState(State.fromString(bankResponse.status()))
-                .build();
-
-        rabbitRepository.producerOnTopic(
-                new ExternalQueue(
-                        exchange,
-                        routingKey,
-                        response
                 )
         );
     }

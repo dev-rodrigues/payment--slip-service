@@ -1,24 +1,28 @@
 package br.com.devrodrigues.slipservice.core.build;
 
-import br.com.devrodrigues.slipservice.core.BankResponse;
 import br.com.devrodrigues.slipservice.core.BillingData;
 import br.com.devrodrigues.slipservice.core.SlipData;
 import br.com.devrodrigues.slipservice.core.constants.State;
 
+import java.math.BigDecimal;
 import java.util.UUID;
 
 public class SlipResultBuilder {
 
-    private BankResponse bankResponse;
     private UUID billingId;
     private State state;
 
-    private SlipResultBuilder(BankResponse bankResponse) {
-        this.bankResponse = bankResponse;
+    private BillingData billingData;
+
+    private BigDecimal value;
+    private String userId;
+    private String orderId;
+
+    private SlipResultBuilder() {
     }
 
-    public static SlipResultBuilder builder(BankResponse bankResponse) {
-        return new SlipResultBuilder(bankResponse);
+    public static SlipResultBuilder builder() {
+        return new SlipResultBuilder();
     }
 
     public SlipResultBuilder withBillingId(UUID id) {
@@ -31,19 +35,35 @@ public class SlipResultBuilder {
         return this;
     }
 
-    public SlipResultBuilder withBankResponse(BankResponse bankResponse) {
-        this.bankResponse = bankResponse;
+
+    public SlipResultBuilder withBillingData(BillingData billingData) {
+        this.billingData = billingData;
+        return this;
+    }
+
+    public SlipResultBuilder withValue(BigDecimal value) {
+        this.value = value;
+        return this;
+    }
+
+    public SlipResultBuilder withUserId(String userId) {
+        this.userId = userId;
+        return this;
+    }
+
+    public SlipResultBuilder withOrderId(String orderId) {
+        this.orderId = orderId;
         return this;
     }
 
     public SlipData build() {
         return new SlipData(
                 billingId,
-                null,
-                null,
-                null,
+                orderId,
+                userId,
+                value,
                 state,
-                null
+                billingData
         );
     }
 }

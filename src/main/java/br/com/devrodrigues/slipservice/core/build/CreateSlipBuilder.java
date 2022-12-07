@@ -6,7 +6,10 @@ import br.com.devrodrigues.slipservice.core.constants.State;
 import br.com.devrodrigues.slipservice.repositories.UserRepository;
 
 import java.math.BigDecimal;
+import java.util.Objects;
 import java.util.UUID;
+
+import static br.com.devrodrigues.slipservice.core.constants.State.ERROR;
 
 public class CreateSlipBuilder {
 
@@ -53,6 +56,18 @@ public class CreateSlipBuilder {
     }
 
     public SlipData build() {
+
+        if (Objects.isNull(billingData)) {
+            return new SlipData(
+                    billingId,
+                    orderId,
+                    userId,
+                    value,
+                    ERROR,
+                    null
+            );
+        }
+
         return new SlipData(
                 billingId,
                 orderId,
