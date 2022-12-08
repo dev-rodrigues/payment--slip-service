@@ -9,6 +9,8 @@ import org.springframework.stereotype.Component;
 
 import java.util.Objects;
 
+import static java.util.Objects.requireNonNull;
+
 @Component
 public class BankRepositoryImpl implements BankRepository {
 
@@ -21,6 +23,6 @@ public class BankRepositoryImpl implements BankRepository {
     @Override
     public BankResponse execute(SlipData slipData) {
         var response = client.paySlip(SlipPaymentData.of(slipData));
-        return BankResponse.of(Objects.requireNonNull(response.getBody()));
+        return BankResponse.of(requireNonNull(response.getBody()));
     }
 }

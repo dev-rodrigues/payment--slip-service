@@ -49,14 +49,6 @@ public class SlipService {
 
         if (nonNull(slip.billingData())) {
 
-            rabbitRepository.producerOnTopic(
-                    new ExternalQueue(
-                            exchange,
-                            routingKey,
-                            slip
-                    )
-            );
-
             var bankResponse = bankRepository.execute(slip);
 
             var response = SlipResultBuilder
@@ -76,6 +68,8 @@ public class SlipService {
                             response
                     )
             );
+
+            return;
         }
 
         // sent to park when integration failure

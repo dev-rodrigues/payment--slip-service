@@ -36,7 +36,15 @@ public class CreateSlipBuilder {
 
     public CreateSlipBuilder withBillingData(String userId) {
         this.userId = userId;
-        this.billingData = userRepository.getBillingData(userId);
+        this.billingData =  userRepository.getBillingData(userId);
+//                new BillingData(
+//                userId,
+//                "dummy",
+//                "21 2222-9033",
+//                "rua das flores",
+//                "21 24249033"
+//        );
+
         return this;
     }
 
