@@ -11,7 +11,7 @@
 
     <groupId>br.com.devrodrigues.slipservice</groupId>
     <artifactId>slip--service</artifactId>
-    <version>2.5</version>
+    <version>2.6</version>
     <name>slip_service</name>
     <description>slip--service</description>
 
