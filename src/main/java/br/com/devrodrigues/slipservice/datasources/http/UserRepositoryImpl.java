@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
+import java.util.Calendar;
 import java.util.Objects;
 import java.util.Random;
 
@@ -42,9 +43,9 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     private ResponseEntity<UserPaymentData> randomResponse(String userId) {
-        var random = new Random();
-        var value = random.nextInt(10);
-        if (value % 2 == 0) {
+        var now = Calendar.getInstance();
+        var seconds = now.get(Calendar.MINUTE);
+        if (seconds % 2 == 0) {
             return ResponseEntity.ok(new UserPaymentData(
                     userId,
                     "Fulano de Tal",
