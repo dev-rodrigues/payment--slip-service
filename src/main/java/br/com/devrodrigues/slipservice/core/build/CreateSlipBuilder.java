@@ -4,6 +4,8 @@ import br.com.devrodrigues.slipservice.core.BillingData;
 import br.com.devrodrigues.slipservice.core.SlipData;
 import br.com.devrodrigues.slipservice.core.constants.State;
 import br.com.devrodrigues.slipservice.repositories.UserRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.math.BigDecimal;
 import java.util.Objects;
@@ -13,6 +15,7 @@ import static br.com.devrodrigues.slipservice.core.constants.State.ERROR;
 
 public class CreateSlipBuilder {
 
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
     private final UserRepository userRepository;
     private UUID billingId;
     private BillingData billingData;
@@ -37,14 +40,6 @@ public class CreateSlipBuilder {
     public CreateSlipBuilder withBillingData(String userId) {
         this.userId = userId;
         this.billingData =  userRepository.getBillingData(userId);
-//                new BillingData(
-//                userId,
-//                "dummy",
-//                "21 2222-9033",
-//                "rua das flores",
-//                "21 24249033"
-//        );
-
         return this;
     }
 
@@ -65,6 +60,8 @@ public class CreateSlipBuilder {
 
     public SlipData build() {
 
+        logger.info("build createSlipBuilder {}}", this);
+
         if (Objects.isNull(billingData)) {
             return new SlipData(
                     billingId,
@@ -84,5 +81,18 @@ public class CreateSlipBuilder {
                 state,
                 billingData
         );
+    }
+
+    @Override
+    public String toString() {
+        return "CreateSlipBuilder{" +
+                "userRepository=" + userRepository +
+                ", billingId=" + billingId +
+                ", billingData=" + billingData +
+                ", orderId='" + orderId + '\'' +
+                ", userId='" + userId + '\'' +
+                ", state=" + state +
+                ", value=" + value +
+                '}';
     }
 }
