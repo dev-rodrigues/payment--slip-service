@@ -1,6 +1,7 @@
 package br.com.devrodrigues.slipservice.datasources.message;
 
 import br.com.devrodrigues.slipservice.core.ExternalQueue;
+import br.com.devrodrigues.slipservice.core.SlipData;
 import br.com.devrodrigues.slipservice.repositories.RabbitRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -32,5 +33,11 @@ public class RabbitRepositoryImpl implements RabbitRepository {
         } catch (JsonProcessingException e) {
             // fallback
         }
+    }
+
+    @Override
+    public void produceOnQueue(String queueName, SlipData payload) throws JsonProcessingException {
+        var json = mapper.writeValueAsString(payload);
+        this.amqpTemplate.convertAndSend(queueName, json);
     }
 }

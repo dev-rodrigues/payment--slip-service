@@ -8,6 +8,7 @@ import br.com.devrodrigues.slipservice.core.constants.State;
 import br.com.devrodrigues.slipservice.repositories.BankRepository;
 import br.com.devrodrigues.slipservice.repositories.RabbitRepository;
 import br.com.devrodrigues.slipservice.repositories.UserRepository;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -34,7 +35,7 @@ public class SlipService {
         this.rabbitRepository = rabbitRepository;
     }
 
-    public void execute(Slip messageData) {
+    public void execute(Slip messageData) throws JsonProcessingException {
 
         var slip = CreateSlipBuilder
                 .builder(userRepository)
@@ -73,12 +74,9 @@ public class SlipService {
         }
 
         // sent to park when integration failure
-        rabbitRepository.producerOnTopic(
-                new ExternalQueue(
-                        exchange,
-                        "beta.payment.park",
-                        slip
-                )
+        rabbitRepository.produceOnQueue(
+                "beta.payment.park",
+                slip
         );
     }
 }
