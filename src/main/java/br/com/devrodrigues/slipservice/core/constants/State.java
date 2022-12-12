@@ -4,7 +4,7 @@ public enum State {
     CREATED,
     WAITING,
     PROCESSING,
-        PROCESSED,
+    PROCESSED,
     ERROR;
 
     public static State fromString(String state) {

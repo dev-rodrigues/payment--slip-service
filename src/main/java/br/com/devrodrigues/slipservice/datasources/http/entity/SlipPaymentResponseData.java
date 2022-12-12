@@ -4,6 +4,14 @@ public class SlipPaymentResponseData {
     private String code;
     private String status;
 
+    public SlipPaymentResponseData() {
+    }
+
+    public SlipPaymentResponseData(String code, String status) {
+        this.code = code;
+        this.status = status;
+    }
+
     public String getCode() {
         return code;
     }
