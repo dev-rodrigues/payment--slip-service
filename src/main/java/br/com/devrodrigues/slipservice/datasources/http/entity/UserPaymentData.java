@@ -19,6 +19,17 @@ public class UserPaymentData {
     @JsonProperty("phone")
     private String phone;
 
+    public UserPaymentData() {
+    }
+
+    public UserPaymentData(String user, String fullName, String peopleDocument, String address, String phone) {
+        this.user = user;
+        this.fullName = fullName;
+        this.peopleDocument = peopleDocument;
+        this.address = address;
+        this.phone = phone;
+    }
+
     public String getUser() {
         return user;
     }
