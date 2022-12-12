@@ -15,4 +15,12 @@ public record BankResponse(
                 "PROCESSED"
         );//new BankResponse(response.getCode(), response.getStatus());
     }
+
+    @Override
+    public String toString() {
+        return "BankResponse{" +
+                "code='" + code + '\'' +
+                ", status='" + status + '\'' +
+                '}';
+    }
 }

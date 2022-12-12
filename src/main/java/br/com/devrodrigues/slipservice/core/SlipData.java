@@ -13,4 +13,16 @@ public record SlipData(
         State state,
         BillingData billingData
 ) {
+
+    @Override
+    public String toString() {
+        return "SlipData{" +
+                "billingId=" + billingId +
+                ", orderId='" + orderId + '\'' +
+                ", userId='" + userId + '\'' +
+                ", value=" + value +
+                ", state=" + state +
+                ", billingData=" + billingData +
+                '}';
+    }
 }
