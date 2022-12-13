@@ -17,7 +17,7 @@ public class CreateSlipBuilder {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     private final UserRepository userRepository;
-    private UUID billingId;
+    private Long billingId;
     private BillingData billingData;
     private String orderId;
     private String userId;
@@ -32,7 +32,7 @@ public class CreateSlipBuilder {
         return new CreateSlipBuilder(userRepository);
     }
 
-    public CreateSlipBuilder withBillingId(UUID id) {
+    public CreateSlipBuilder withBillingId(Long id) {
         this.billingId = id;
         return this;
     }

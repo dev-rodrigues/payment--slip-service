@@ -9,7 +9,7 @@ import java.util.UUID;
 
 public class SlipResultBuilder {
 
-    private UUID billingId;
+    private Long billingId;
     private State state;
 
     private BillingData billingData;
@@ -25,7 +25,7 @@ public class SlipResultBuilder {
         return new SlipResultBuilder();
     }
 
-    public SlipResultBuilder withBillingId(UUID id) {
+    public SlipResultBuilder withBillingId(Long id) {
         this.billingId = id;
         return this;
     }

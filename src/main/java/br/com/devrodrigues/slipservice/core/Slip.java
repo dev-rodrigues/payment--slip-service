@@ -7,8 +7,7 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 public class Slip {
-
-    private UUID id;
+    private Long id;
     private String userId;
     private String orderId;
     private State state;
@@ -16,11 +15,11 @@ public class Slip {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
-    public UUID getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

@@ -3,10 +3,9 @@ package br.com.devrodrigues.slipservice.datasources.http.entity;
 import br.com.devrodrigues.slipservice.core.SlipData;
 
 import java.math.BigDecimal;
-import java.util.UUID;
 
 public record SlipPaymentData(
-        UUID billingId,
+        Long billingId,
         String orderId,
         String userId,
         BigDecimal value,
