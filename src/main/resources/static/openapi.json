@@ -1,0 +1,152 @@
+{
+  "openapi": "3.0.2",
+  "info": {
+    "title": "slip-service",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/slip": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SlipData"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": "no-content"
+          }
+        }
+      }
+    },
+    "/billing/{userId}": {
+      "get": {
+        "parameters": [
+          {
+            "name": "userId",
+            "schema": {
+              "type": "string"
+            },
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BillingData"
+                }
+              }
+            },
+            "description": "billing status"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "userId",
+          "schema": {
+            "type": "string"
+          },
+          "in": "path",
+          "required": true
+        }
+      ]
+    }
+  },
+  "components": {
+    "schemas": {
+      "SlipData": {
+        "description": "",
+        "required": [
+          "id",
+          "value",
+          "userId",
+          "state",
+          "orderId"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "userId": {
+            "type": "string"
+          },
+          "orderId": {
+            "type": "string"
+          },
+          "state": {
+            "enum": [
+              "CREATED",
+              "WAITING",
+              "PROCESSING",
+              "PROCESSED",
+              "ERROR"
+            ],
+            "type": "string"
+          },
+          "value": {
+            "format": "float",
+            "type": "number"
+          }
+        },
+        "example": {
+          "id": 6,
+          "userId": "some text",
+          "orderId": "some text",
+          "state": "some text",
+          "value": 87.24
+        }
+      },
+      "BillingData": {
+        "description": "",
+        "required": [
+          "user",
+          "address",
+          "fullName",
+          "peopleDocument",
+          "phone"
+        ],
+        "properties": {
+          "user": {
+            "description": "",
+            "type": "string"
+          },
+          "fullName": {
+            "description": "",
+            "type": "string"
+          },
+          "peopleDocument": {
+            "description": "",
+            "type": "string"
+          },
+          "address": {
+            "description": "",
+            "type": "string"
+          },
+          "phone": {
+            "description": "",
+            "type": "string"
+          },
+          "code": {
+            "description": "",
+            "type": "string"
+          },
+          "status": {
+            "description": "",
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

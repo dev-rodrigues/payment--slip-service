@@ -2,6 +2,7 @@ package br.com.devrodrigues.slipservice.service;
 
 import br.com.devrodrigues.slipservice.core.ExternalQueue;
 import br.com.devrodrigues.slipservice.core.Slip;
+import br.com.devrodrigues.slipservice.core.SlipData;
 import br.com.devrodrigues.slipservice.core.build.CreateSlipBuilder;
 import br.com.devrodrigues.slipservice.core.build.SlipResultBuilder;
 import br.com.devrodrigues.slipservice.core.constants.State;
@@ -10,6 +11,7 @@ import br.com.devrodrigues.slipservice.repositories.RabbitRepository;
 import br.com.devrodrigues.slipservice.repositories.UserRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.util.Pair;
 import org.springframework.stereotype.Service;
 
 import static java.util.Objects.nonNull;
@@ -35,7 +37,7 @@ public class SlipService {
         this.rabbitRepository = rabbitRepository;
     }
 
-    public void execute(Slip messageData) throws JsonProcessingException {
+    public Pair<SlipData, SlipData> execute(Slip messageData) throws JsonProcessingException {
 
         System.out.println("Received message: " + messageData);
 
@@ -76,7 +78,7 @@ public class SlipService {
                     )
             );
 
-            return;
+            return Pair.of(slip, response);
         }
 
         // sent to park when integration failure
@@ -86,5 +88,6 @@ public class SlipService {
         );
 
         System.out.println("Sent to park: " + slip);
+        return null;
     }
 }

@@ -4,7 +4,6 @@ import br.com.devrodrigues.slipservice.core.constants.State;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 public class Slip {
     private Long id;
@@ -14,6 +13,25 @@ public class Slip {
     private BigDecimal value;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+
+    public Slip() {
+    }
+
+    public Slip(Long id,
+                String userId,
+                String orderId,
+                State state,
+                BigDecimal value,
+                LocalDateTime createdAt,
+                LocalDateTime updatedAt) {
+        this.id = id;
+        this.userId = userId;
+        this.orderId = orderId;
+        this.state = state;
+        this.value = value;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+    }
 
     public Long getId() {
         return id;
