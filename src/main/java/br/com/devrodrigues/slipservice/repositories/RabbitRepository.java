@@ -7,8 +7,5 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 
 public interface RabbitRepository {
     void producerOnTopic(ExternalQueue externalQueue);
-    void produceOnQueue(
-            String queueName,
-            SlipData payload
-    ) throws JsonProcessingException;
+    void produceOnQueue(String queueName, SlipData payload) throws JsonProcessingException;
 }
